@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
+    <a class="navbar-brand" href="{{ path('article_list') }}">Journal</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav font-weight-bold">
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('article_list') }}">
+                <i class="far fa-newspaper mx-2"></i>
+                Voir les articles
+            </a>
+        </li>
+        {% if is_granted('ROLE_ADMIN') %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('admin_article_list') }}">
+                    <i class="fas fa-edit mx-2"></i>
+                    Gérer les articles
+                </a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-user mx-2"></i>
+                {{ app.user.name }}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="nav-link" href="{{ path('app_logout') }}">
+                        <i class="fas fa-sign-out-alt mx-2"></i>
+                        Se déconnecter
+                    </a>
+                </div>
+            </li>
+        {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_login') }}">
+                <i class="fas fa-sign-in-alt mx-2"></i>
+                Se connecter
+            </a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>

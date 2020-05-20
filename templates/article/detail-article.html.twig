@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ article.titre|capitalize }}{% endblock %}
+
+
+{% block body %}
+    <div class="bg-light vh-100">
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <div class="row">
+                    <div class="col-4">
+                        <img src="{{ vich_uploader_asset(article, 'imageFile') | imagine_filter('medium') }}" class="w-100">
+                    </div>
+                    <div class="col-8">
+                        <h1 class="display-4">{{ article.titre|capitalize }}</h1>
+                        <h4>
+                            {{ article.auteur|capitalize }}
+                        </h4>
+                        <p>
+                            {{ article.contenu }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div>
+                <a href="{{ path('article_list') }}" class="nav-item btn btn-success mx-2text-white">Consulter les autres articles</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

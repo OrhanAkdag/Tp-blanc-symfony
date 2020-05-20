@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout d'un article'!{% endblock %}
+
+{% block body %}
+    <div class="bg-light vh-100 my-2">
+        <div class="container">
+            <h1 class="text-center bg-primary text-white p-2">Ajouter un article</h1>
+            <div class="my-2 shadow p-4">
+                {% form_theme form 'bootstrap_4_layout.html.twig' %}
+                {{ form_start(form) }}
+                {{ form_row(form.titre) }}
+                {{ form_row(form.contenu) }}
+                {{ form_row(form.auteur) }}
+                {{ form_row(form.imageFile) }}
+                {{ form_label(form.save) }}
+                {{ form_widget(form.save) }}
+                {{ form_end(form) }}
+            </div>
+            <div>
+                <a href="{{ path('admin_article_list') }}" class="nav-item btn btn-success mx-2 text-white">Revenir à mes articles</a>
+            </div>
+        </div>
+        <ul>
+            {% if form.vars.errors.form.getErrors(true)|length > 0 %}
+            {% for error in form.vars.errors.form.getErrors(true) %}
+                <li>{{ error.message }}</li>
+            {% endfor %}
+            {% endif %}
+        </ul>
+    </div>
+{% endblock %}
