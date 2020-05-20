@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
@@ -28,12 +30,6 @@ class Article
      */
     private $titre;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotNull(message="Veuillez entrez l'auteur de l'article'")
-     * @AppConstraint\OnlyLetter(message="Les chiffres ne sont pas autorisés")
-     */
-    private $auteur;
 
     /**
      * @ORM\Column(type="text")
@@ -74,11 +70,19 @@ class Article
      */
     private $updatedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="articles")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $auteur;
+
+
     public function __construct()
     {
         $this->created_at = new \DateTime();
         $this->updatedAt = new \DateTime();
     }
+
 
     public function setImageFile(?File $imageFile = null): void
     {
@@ -123,18 +127,6 @@ class Article
         return $this;
     }
 
-    public function getAuteur(): ?string
-    {
-        return $this->auteur;
-    }
-
-    public function setAuteur(string $auteur): self
-    {
-        $this->auteur = $auteur;
-
-        return $this;
-    }
-
     public function getContenu(): ?string
     {
         return $this->contenu;
@@ -161,5 +153,19 @@ class Article
 
         return $this;
     }
+
+    public function getAuteur(): ?User
+    {
+        return $this->auteur;
+    }
+
+    public function setAuteur(?User $auteur): self
+    {
+        $this->auteur = $auteur;
+
+        return $this;
+    }
+
+
 
 }

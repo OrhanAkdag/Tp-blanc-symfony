@@ -16,6 +16,9 @@
                         <h4>
                             {{ article.auteur|capitalize }}
                         </h4>
+                        <h5>
+                        {{ article.createdAt|date('d/m/Y') }}
+                        </h5>
                         <p>
                             {{ article.contenu }}
                         </p>

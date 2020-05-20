@@ -6,8 +6,9 @@ use App\Entity\Article;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-class ArticleFixtures extends Fixture
+class ArticleFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
@@ -15,9 +16,10 @@ class ArticleFixtures extends Fixture
             // create 20 articles! Bam!
             for ($i = 1; $i < 9; $i++) {
                 $article = new Article();
+                $auteur = $manager->getRepository(User::class)->findAll()[0];
                 $article->setTitre('Titre de l\'article n° '.$i);
                 $article->setContenu('Ceci est le contenu de mon article n° '.$i);
-                $article->setAuteur('Admin');
+                $article->setAuteur($auteur);
                 $article->setCreatedAt(new \DateTime());
                 $article->setImageName('300x200.png');
                 $manager->persist($article);

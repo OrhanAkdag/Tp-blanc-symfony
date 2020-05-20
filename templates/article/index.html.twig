@@ -17,6 +17,10 @@
                         <img src="{{ vich_uploader_asset(article, 'imageFile') | imagine_filter('my_thumb') }}" class="w-100">
                         <div class="card-body">
                         <h5 class="card-title">{{article.titre}}</h5>
+                        <h6>
+                            {{ article.createdAt|date('d/m/Y') }} <br>
+                            {{ article.auteur }}
+                        </h6>
                         <p class="card-text">{{article.contenu}}</p>
                         <a href="{{ path('detail_article', {'article': article.id}) }}" class="btn btn-primary">Consulter</a>
                         </div>

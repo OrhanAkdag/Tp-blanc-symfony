@@ -21,11 +21,4 @@ class UserFixtures extends Fixture
 
     }
 
-    public function getDependencies()
-    {
-        return array(
-            UserFixtures::class,
-        );
-    }
-
 }

@@ -26,7 +26,9 @@
                     <img src="{{ vich_uploader_asset(article, 'imageFile') | imagine_filter('list_thumb') }}" class="w-100">
                 </td>
                 <td>{{ article.titre }}</td>
-                <td>{{ article.auteur }}</td>
+                <td>
+                    {{ article.auteur }}
+                </td>
                 <td>{{ article.createdAt|date('d/m/Y') }}</td>
                 <td>
                     <a href="{{ path('detail_article', {'article': article.id}) }}"><i class="fas fa-eye mx-2"></i></a>

@@ -23,10 +23,6 @@ class ArticleType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])
-            ->add('auteur', TextType::class,
-            [
-                'label'=> 'Auteur de l\'article',
-            ])
             ->add('contenu', TextareaType::class, [
                 'label' => 'Contenu de l\'article',
                 'attr' => [
@@ -43,6 +39,8 @@ class ArticleType extends AbstractType
                 'imagine_pattern' => 'edit_thumb',
 
             ])
+            ->add('auteur')
+
             ->add('save', SubmitType::class)   
         ;
     }
