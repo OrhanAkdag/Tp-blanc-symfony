@@ -6,15 +6,15 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav font-weight-bold">
         <li class="nav-item">
-            <a class="nav-link" href="{{ path('article_list') }}">
+            <a class="nav-link {% if app.request.attributes.get('_route') == 'article_list' %}active{% endif %}" href="{{ path('article_list') }}">
                 <i class="far fa-newspaper mx-2"></i>
                 Voir les articles
             </a>
         </li>
         {% if is_granted('ROLE_ADMIN') %}
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('admin_article_list') }}">
-                    <i class="fas fa-edit mx-2"></i>
+                <a class="nav-link {% if app.request.attributes.get('_route') == 'admin_article_list' %}active{% endif %}" href="{{ path('admin_article_list') }}">
+                    <i class="far fa-newspaper mx-2"></i>
                     Gérer les articles
                 </a>
             </li>
