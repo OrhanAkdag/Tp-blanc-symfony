@@ -18,7 +18,6 @@ class ArticleController extends AbstractController
     public function index()
     {
         $articles = $this->getDoctrine()->getRepository(Article::class)->findAll();
-        dump($articles);
         return $this->render('article/index.html.twig', [
             'articles'=> $articles
             ]);
@@ -50,6 +49,9 @@ class ArticleController extends AbstractController
            $entityManager = $this->getDoctrine()->getManager();
            $entityManager->persist($article);
            $entityManager->flush();
+           $this->addFlash(
+            'notice',
+            'L\'article '.$article->getId().' a été ajouté !');
            return $this->redirectToRoute('admin_article_list');
        } else {
 
@@ -78,8 +80,12 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             $article = $form->getData();
+            dump($form);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
+            $this->addFlash(
+                'notice',
+                'L\'article '.$article->getId().' a été mis à jour !');
             return $this->redirectToRoute('admin_article_list');
         } else {
             return $this->render('admin/edit-article.html.twig',
@@ -96,6 +102,9 @@ class ArticleController extends AbstractController
     {
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($article);
+        $this->addFlash(
+            'notice',
+            'L\'article '.$article->getId().' a été supprimé !');
         $entityManager->flush();
         return $this->redirectToRoute('admin_article_list');
     }

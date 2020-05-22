@@ -14,7 +14,7 @@
         {% if is_granted('ROLE_ADMIN') %}
             <li class="nav-item">
                 <a class="nav-link {% if app.request.attributes.get('_route') == 'admin_article_list' %}active{% endif %}" href="{{ path('admin_article_list') }}">
-                    <i class="far fa-newspaper mx-2"></i>
+                    <i class="far fa-edit mx-2"></i>
                     Gérer les articles
                 </a>
             </li>
