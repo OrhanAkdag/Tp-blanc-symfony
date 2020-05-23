@@ -3,32 +3,44 @@
 {% block title %}Listes des articles!{% endblock %}
 
 {% block body %}
-
-<div class="container my-2">
-    <h1 class="text-center bg-light p-3 shadow">Les articles en ligne</h1>
-    <div class="row m-0">
-        {% if  articles|length == 0 %}
-            <h2>Il n'y a pas d'article en ligne</h2>
-        {% endif %}
-                {% for article in articles %}
-            <div class="col-3 my-2">
-                <div class="shadow">
-                    <div class="card" style="width: auto;">
-                        <img src="{{ vich_uploader_asset(article, 'imageFile') | imagine_filter('my_thumb') }}" class="w-100">
-                        <div class="card-body">
-                        <h5 class="card-title">{{article.titre}}</h5>
-                        <h6>
-                            {{ article.createdAt|date('d/m/Y') }} <br>
-                            {{ article.auteur }}
-                        </h6>
-                        <p class="card-text">{{article.contenu}}</p>
-                        <a href="{{ path('detail_article', {'article': article.id}) }}" class="btn btn-primary">Consulter</a>
-                        </div>
-                    </div>
+    <div class="container h-100 d-flex justify-content-center align-items-center">
+        <div class="bg-light">
+            <div class="row h-100">
+            <div class="">
+                <h1 class="text-center bg-light p-3 shadow">Les articles en ligne</h1>
+                    <div class="row m-0">
+                    {% if  articles|length == 0 %}
+                        <h2>Il n'y a pas d'article en ligne</h2>
+                    {% endif %}
+                    {% for article in pagination  %}
+                        <div class="col-3 my-2">
+                            <div class="shadow">
+                                <div class="card" style="width: auto;">
+                                    {% if article.imageName %}
+                                    <img src="{{ vich_uploader_asset(article, 'imageFile') | imagine_filter('my_thumb') }}" class="w-100">
+                                    {% else %}
+                                    <img src="{{ '/images/articles/300x200.png' | imagine_filter('my_thumb') }}" class="w-100">
+                                    {% endif %}
+                                    <div class="card-body">
+                                    <h5 class="card-title">{{article.titre}}</h5>
+                                    <h6>
+                                        {{ article.createdAt|date('d/m/Y') }} <br>
+                                        {{ article.auteur }}
+                                    </h6>
+                                    <p class="card-text">{{article.contenu}}</p>
+                                    <a href="{{ path('detail_article', {'article': article.id}) }}" class="btn btn-primary">Consulter</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>        
+                    {% endfor %}
                 </div>
-            </div>        
-        {% endfor %}
+            </div>
+        </div>
+        <div class="navigation d-flex justify-content-center align-items-end my-3">
+            {{ knp_pagination_render(pagination) }}
+        </div>
     </div>
-</div>
+
 {% endblock %}
 

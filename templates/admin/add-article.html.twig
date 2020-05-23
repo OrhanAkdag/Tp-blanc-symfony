@@ -3,30 +3,34 @@
 {% block title %}Ajout d'un article'!{% endblock %}
 
 {% block body %}
-    <div class="bg-light my-2">
-        <div class="container">
+<div class="container h-100 d-flex justify-content-center align-items-center my-2">
+    <div class="p-2 bd-highlight w-100">            
+        <div class="p-2 bd-highlight">
             <h1 class="text-center bg-primary text-white p-2">Ajouter un article</h1>
-            <div class="my-2 shadow p-4">
-                {% form_theme form 'bootstrap_4_layout.html.twig' %}
-                {{ form_start(form) }}
-                {{ form_row(form.titre) }}
-                {{ form_row(form.contenu) }}
-                {{ form_row(form.imageFile) }}
-                {{ form_row(form.auteur) }}
-                {{ form_label(form.save) }}
-                {{ form_widget(form.save) }}
-                {{ form_end(form) }}
-            </div>
-            <div>
-                <a href="{{ path('admin_article_list') }}" class="nav-item btn btn-success text-white">Revenir à mes articles</a>
-            </div>
+                <div class="my-2 shadow p-4">
+                    {% form_theme form 'bootstrap_4_layout.html.twig' %}
+                    {{ form_start(form) }}
+                    {{ form_row(form.titre) }}
+                    {{ form_row(form.contenu) }}
+                    {{ form_row(form.imageFile) }}
+                    {{ form_row(form.auteur) }}
+                    {{ form_label(form.save) }}
+                    {{ form_widget(form.save) }}
+                    {{ form_end(form) }}
+                </div>
+                <div>
+                    <a href="{{ path('admin_article_list') }}" class="nav-item btn btn-success text-white">Revenir à mes articles</a>
+                </div>
         </div>
-        <ul>
-            {% if form.vars.errors.form.getErrors(true)|length > 0 %}
-            {% for error in form.vars.errors.form.getErrors(true) %}
-                <li>{{ error.message }}</li>
-            {% endfor %}
-            {% endif %}
-        </ul>
+        <div class="p-2 bd-highlight">
+            <ul>
+                {% if form.vars.errors.form.getErrors(true)|length > 0 %}
+                {% for error in form.vars.errors.form.getErrors(true) %}
+                    <li>{{ error.message }}</li>
+                {% endfor %}
+                {% endif %}
+            </ul>
+        </div>
     </div>
+</div>
 {% endblock %}

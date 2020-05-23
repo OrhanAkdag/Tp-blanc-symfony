@@ -14,7 +14,7 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
     {
         {
             // create 20 articles! Bam!
-            for ($i = 1; $i < 9; $i++) {
+            for ($i = 1; $i < 25; $i++) {
                 $article = new Article();
                 $auteur = $manager->getRepository(User::class)->findAll()[0];
                 $article->setTitre('Titre de l\'article n° '.$i);
