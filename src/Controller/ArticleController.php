@@ -33,18 +33,36 @@ class ArticleController extends AbstractController
     /**
      * @Route("admin/article-list", name="admin_article_list")
      */
-    public function listArticle(PaginatorInterface $paginator, Request $request)
+    public function listArticle(EntityManagerInterface $em, PaginatorInterface $paginator, Request $request)
     {
-        $articles = $this->getDoctrine()->getRepository(Article::class)->findAll();
-        $pagination = $paginator->paginate(
-            $articles,
+        $dql   = "SELECT a FROM App:Article a";
+        $query = $em->createQuery($dql);
+        $articles = $paginator->paginate(
+            $query,
             $request->query->getInt('page', 1), /*page number*/
             6 /*limit per page*/
         );
         return $this->render('admin/list-article.html.twig', [
-            'pagination' => $pagination,
             'articles'=> $articles
             ]);
+    }
+
+        /**
+     * @Route("test", name="test")
+     */
+    public function listAction(EntityManagerInterface $em, PaginatorInterface $paginator, Request $request)
+    {
+        $dql   = "SELECT a FROM App:Article a";
+        $query = $em->createQuery($dql);
+    
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            10 /*limit per page*/
+        );
+    
+        // parameters to template
+        return $this->render('test.html.twig', ['pagination' => $pagination]);
     }
 
     /**

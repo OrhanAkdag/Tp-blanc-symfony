@@ -16,7 +16,7 @@
         {# total items count #}
         <div class="d-flex justify-content-between p-3 bg-light">
             <div class="count">
-                Il y a {{ pagination.getTotalItemCount }} articles en ligne.
+                Il y a {{ articles.getTotalItemCount }} articles en ligne.
             </div>
             <div>
                 <a href="{{ path('add_article')}}" class="nav-item btn btn-primary text-white">
@@ -28,29 +28,29 @@
             <tr>
                 {# sorting of properties based on query components #}
                 <th scope="col">
-                    {{ knp_pagination_sortable(pagination, '#', 'article.id') }}
+                    {{ knp_pagination_sortable(articles, 'Id', 'a.id') }}
                 </th>
                 <th scope="col">
                     Image
                 </th>
                 <th
-                    {% if pagination.isSorted('article.Titre') %} class="sorted col"{% endif %}>
-                    {{ knp_pagination_sortable(pagination, 'Titre', 'article.titre') }}
+                    {% if articles.isSorted('a.Titre') %} class="sorted col"{% endif %}>
+                    {{ knp_pagination_sortable(articles, 'Titre', 'a.titre') }}
                 </th>
                 <th
-                    {% if pagination.isSorted('article.Auteur') %} class="col sorted"{% endif %}>
-                    {{ knp_pagination_sortable(pagination, 'Auteur', 'article.auteur') }}
+                    {% if articles.isSorted('a.Auteur') %} class="col sorted"{% endif %}>
+                    {{ knp_pagination_sortable(articles, 'Auteur', 'a.auteur') }}
                 </th>
                 <th
-                    {% if pagination.isSorted(['article.Date']) %} class="sorted col"{% endif %}>
-                    {{ knp_pagination_sortable(pagination, 'Date', ['article.createdAt']) }}
+                    {% if articles.isSorted(['a.created_at']) %} class="sorted col"{% endif %}>
+                    {{ knp_pagination_sortable(articles, 'Date', ['a.created_at']) }}
                 </th>
                 <th scope="col">
                     Action
                 </th>
             </tr>
                 {# table body #}
-                {% for article in pagination %}
+                {% for article in articles %}
                 <tr {% if loop.index is odd %}class="color"{% endif %}>
                     <th scope="row">
                         {{ article.id }}
@@ -110,7 +110,7 @@
             {% endfor %} 
         </table>
         <div class="navigation d-flex justify-content-center">
-            {{ knp_pagination_render(pagination) }}
+            {{ knp_pagination_render(articles) }}
         </div>
     </div>
 </div>
