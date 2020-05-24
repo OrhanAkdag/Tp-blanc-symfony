@@ -1,12 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajout d'un article'!{% endblock %}
+{% block title %}Ajout d'un article!{% endblock %}
 
 {% block body %}
 <div class="container h-100 d-flex justify-content-center align-items-center my-2">
     <div class="p-2 bd-highlight w-100">            
         <div class="p-2 bd-highlight">
             <h1 class="text-center bg-primary text-white p-2">Ajouter un article</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{{ path('article_list') }}">Accueil</a>
+                    </li>
+                <li class="breadcrumb-item">
+                    <a active aria-current="page">Ajout d'un article!</a>
+                    </li>
+                </ol>
+            </nav>
                 <div class="my-2 shadow p-4">
                     {% form_theme form 'bootstrap_4_layout.html.twig' %}
                     {{ form_start(form) }}

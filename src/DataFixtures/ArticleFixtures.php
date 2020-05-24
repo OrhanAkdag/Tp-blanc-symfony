@@ -14,14 +14,14 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
     {
         {
             // create 20 articles! Bam!
-            for ($i = 1; $i < 25; $i++) {
+            for ($i = 1; $i < 9; $i++) {
                 $article = new Article();
                 $auteur = $manager->getRepository(User::class)->findAll()[0];
                 $article->setTitre('Titre de l\'article n° '.$i);
                 $article->setContenu('Ceci est le contenu de mon article n° '.$i);
                 $article->setAuteur($auteur);
                 $article->setCreatedAt(new \DateTime());
-                $article->setImageName('300x200.png');
+                $article->setImageName('image'.$i.'.png');
                 $manager->persist($article);
             }
     

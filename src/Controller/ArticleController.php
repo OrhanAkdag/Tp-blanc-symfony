@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use WhiteOctober\BreadcrumbsBundle\Model\Breadcrumbs;
 
 class ArticleController extends AbstractController
 {
@@ -45,24 +46,6 @@ class ArticleController extends AbstractController
         return $this->render('admin/list-article.html.twig', [
             'articles'=> $articles
             ]);
-    }
-
-        /**
-     * @Route("test", name="test")
-     */
-    public function listAction(EntityManagerInterface $em, PaginatorInterface $paginator, Request $request)
-    {
-        $dql   = "SELECT a FROM App:Article a";
-        $query = $em->createQuery($dql);
-    
-        $pagination = $paginator->paginate(
-            $query, /* query NOT result */
-            $request->query->getInt('page', 1), /*page number*/
-            10 /*limit per page*/
-        );
-    
-        // parameters to template
-        return $this->render('test.html.twig', ['pagination' => $pagination]);
     }
 
     /**

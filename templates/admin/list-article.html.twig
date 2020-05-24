@@ -5,8 +5,18 @@
 {% block body %}
 
 <div class="container h-100 d-flex justify-content-center align-items-center my-2">
-    <div class="bg-light w-100">       
+    <div class="bg-light w-100">     
         <h1 class="bg-light p-3 text-center shadow">Listes des articles</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                  <a href="{{ path('article_list') }}">Accueil</a>
+                </li>
+              <li class="breadcrumb-item">
+                  <a active aria-current="page">Liste des articles</a>
+                </li>
+            </ol>
+        </nav>  
             {# read and display just one flash message type #}
             {% for message in app.flashes('notice') %}
                 <div class="alert alert-success" role="alert">
